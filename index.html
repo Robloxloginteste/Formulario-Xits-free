@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulário Discord</title>
+  <title>Formulário Staff - Xits Free</title>
   <style>
     * {
       margin: 0;
@@ -21,7 +21,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 30px 20px;
     }
 
     /* Fundo de bolinhas vermelhas */
@@ -53,33 +53,33 @@
       position: relative;
       z-index: 2;
       background: rgba(20, 20, 20, 0.95);
-      padding: 45px 50px;
+      padding: 40px 45px;
       border-radius: 16px;
       border: 3px solid #000000;
       width: 100%;
-      max-width: 620px;
-      text-align: center;
+      max-width: 680px;        /* Tamanho justo */
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
 
     .main-box h2 {
       color: #ff4444;
-      margin-bottom: 30px;
+      text-align: center;
+      margin-bottom: 35px;
       font-size: 24px;
     }
 
     .main-box ol {
       list-style: none;
       counter-reset: item;
-      text-align: left;
-      max-width: 520px;
+      max-width: 580px;
       margin: 0 auto;
     }
 
     .main-box li {
       counter-increment: item;
-      margin-bottom: 25px;
-      padding-left: 38px;
-      font-size: 17.5px;
+      margin-bottom: 35px;
+      padding-left: 40px;
+      font-size: 17px;
       line-height: 1.5;
       position: relative;
     }
@@ -93,41 +93,33 @@
       width: 30px;
     }
 
-    /* Input do Discord direto embaixo do texto 1. */
-    .discord-input-container {
-      margin-top: 8px;
-      margin-bottom: 30px;
-      padding: 18px;
-      background: #1a1a1a;
-      border: 2px solid #444;
-      border-radius: 12px;
-    }
-
-    .discord-input-container label {
-      display: block;
-      color: #ff6666;
-      margin-bottom: 8px;
-      font-size: 15px;
-    }
-
-    .discord-input {
+    /* Caixa de resposta para cada pergunta */
+    .answer-box {
+      margin-top: 12px;
       width: 100%;
-      padding: 15px;
+    }
+
+    .answer-box textarea {
+      width: 100%;
+      min-height: 110px;
+      padding: 14px;
       background: #111;
       color: white;
-      border: 2px solid #666;
+      border: 2px solid #555;
       border-radius: 10px;
-      font-size: 17px;
-      text-align: center;
+      font-size: 16px;
+      resize: vertical;
     }
 
-    .discord-input:focus {
+    .answer-box textarea:focus {
       border-color: #ff4444;
       outline: none;
     }
 
     .btn {
-      padding: 15px 50px;
+      display: block;
+      margin: 30px auto 0;
+      padding: 15px 60px;
       background: #ff2222;
       color: white;
       border: none;
@@ -151,30 +143,43 @@
 
   <!-- Caixa principal -->
   <div class="main-box">
-    <h2>Instruções</h2>
+    <h2>Formulário para Staff - Xits Free</h2>
     
     <ol>
+      <!-- Item 1 -->
       <li>
         <strong>Bote o seu nick do Discord aqui para começar o formulário!</strong>
-        
-        <!-- Input direto embaixo do texto 1. -->
-        <div class="discord-input-container">
-          <label for="discord-nick">Seu Nick do Discord:</label>
-          <input type="text" id="discord-nick" class="discord-input" placeholder="Ex: Victor#1234 ou Victor" maxlength="50">
+        <div class="answer-box">
+          <textarea id="discord-nick" placeholder="Ex: Victor#1234 ou Victor" maxlength="50"></textarea>
         </div>
       </li>
-      
-      <li>Segundo item da lista</li>
-      <li>Terceiro item da lista</li>
-      <li>Quarto item da lista</li>
-      <li>Quinto item da lista</li>
-      <li>Sexto item da lista</li>
-      <li>Sétimo item da lista</li>
-      <li>Oitavo item da lista</li>
-      <li>Nono item da lista</li>
+
+      <!-- Item 2 -->
+      <li>
+        <strong>Porque você quer virar Staff no Xits Free?</strong>
+        <div class="answer-box">
+          <textarea id="pergunta2" placeholder="Escreva sua resposta aqui..."></textarea>
+        </div>
+      </li>
+
+      <!-- Item 3 -->
+      <li>
+        <strong>O que aconteceria se tivesse uma invasão no servidor sem eu estar on? O que você faria nessa situação?</strong>
+        <div class="answer-box">
+          <textarea id="pergunta3" placeholder="Escreva sua resposta aqui..."></textarea>
+        </div>
+      </li>
+
+      <!-- Item 4 -->
+      <li>
+        <strong>Se dois membros estivessem brigando, o que você faria?</strong>
+        <div class="answer-box">
+          <textarea id="pergunta4" placeholder="Escreva sua resposta aqui..."></textarea>
+        </div>
+      </li>
     </ol>
 
-    <button class="btn" onclick="continuar()">Continuar</button>
+    <button class="btn" onclick="enviarFormulario()">Enviar Formulário</button>
   </div>
 
   <script>
@@ -213,13 +218,16 @@
       createParticle();
     }
 
-    function continuar() {
+    function enviarFormulario() {
       const nick = document.getElementById('discord-nick').value.trim();
+      
       if (nick === "") {
-        alert("Por favor, digite seu nick do Discord para continuar!");
-      } else {
-        alert("Nick do Discord salvo: " + nick + "\n\n(Formulário continuaria aqui)");
+        alert("Por favor, preencha seu nick do Discord!");
+        return;
       }
+
+      alert("✅ Formulário enviado com sucesso!\n\nNick: " + nick + "\n\nAs respostas foram registradas.");
+      // Aqui você pode adicionar código para enviar os dados de verdade depois
     }
   </script>
 
