@@ -54,7 +54,7 @@
       position: relative;
       z-index: 2;
       background: rgba(20, 20, 20, 0.95);
-      padding: 35px 40px;
+      padding: 40px 45px;
       border-radius: 16px;
       border: 3px solid #000000;
       width: 100%;
@@ -115,22 +115,47 @@
       outline: none;
     }
 
-    .btn {
-      display: block;
-      margin: 35px auto 0;
-      padding: 14px 60px;
-      background: #ff2222;
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 16.5px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
+    /* Área dos botões */
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 35px;
+      flex-wrap: wrap;
     }
 
-    .btn:hover {
+    .btn {
+      padding: 14px 50px;
+      font-size: 16.5px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-enviar {
+      background: #ff2222;
+      color: white;
+    }
+
+    .btn-enviar:hover {
       background: #ff5555;
+      transform: scale(1.05);
+    }
+
+    .btn-voltar {
+      background: #5865F2;        /* Cor oficial do Discord */
+      color: white;
+      padding: 14px 28px;
+      font-size: 15.5px;
+    }
+
+    .btn-voltar:hover {
+      background: #4752C4;
       transform: scale(1.05);
     }
 
@@ -195,7 +220,15 @@
       </li>
     </ol>
 
-    <button class="btn" onclick="enviarFormulario()">Enviar Formulário</button>
+    <!-- Botões lado a lado -->
+    <div class="buttons">
+      <button class="btn btn-enviar" onclick="enviarFormulario()">Enviar Formulário</button>
+      <button class="btn btn-voltar" onclick="voltarDiscord()">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Discord_Logo.svg/512px-Discord_Logo.svg.png" 
+             alt="Discord" width="22" height="22" style="filter: brightness(0) invert(1);">
+        Voltar ao Discord
+      </button>
+    </div>
   </div>
 
   <div id="error-message">Preencha todas as caixas com uma resposta e depois clique em enviar formulário!</div>
@@ -214,8 +247,8 @@
       reset() {
         this.x = Math.random() * width;
         this.y = -100 - Math.random() * 300;
-        this.size = Math.random() * 14 + 5;        // pequenas, médias e grandes
-        this.speed = Math.random() * 1.4 + 1.8;    // velocidade suave
+        this.size = Math.random() * 14 + 5;
+        this.speed = Math.random() * 1.4 + 1.8;
         this.opacity = Math.random() * 0.3 + 0.75;
       }
 
@@ -253,14 +286,13 @@
 
     function initParticles() {
       particles = [];
-      for (let i = 0; i < 110; i++) {        // quantidade inicial média
+      for (let i = 0; i < 110; i++) {
         particles.push(new Particle());
       }
     }
 
-    // Gera novas bolinhas em ritmo médio
     function createNewParticle() {
-      if (particles.length < 160) {          // limite máximo para não sobrecarregar
+      if (particles.length < 160) {
         particles.push(new Particle());
       }
     }
@@ -270,15 +302,13 @@
       initParticles();
     });
 
-    // Inicialização
     resizeCanvas();
     initParticles();
     animate();
 
-    // Bolinhas aparecendo continuamente em ritmo médio
-    setInterval(createNewParticle, 65);   // aparecendo em velocidade média (ajustado)
+    setInterval(createNewParticle, 65);
 
-    // Validação do formulário
+    // ====================== Funções dos Botões ======================
     const errorMessage = document.getElementById('error-message');
 
     function enviarFormulario() {
@@ -298,6 +328,12 @@
       } else {
         alert("✅ Formulário enviado com sucesso!");
       }
+    }
+
+    function voltarDiscord() {
+      // Aqui você pode colocar o link do seu servidor do Discord
+      window.open("https://discord.com", "_blank");
+      // Se quiser redirecionar para um servidor específico, troque o link acima
     }
   </script>
 </body>
