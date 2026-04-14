@@ -16,12 +16,11 @@
       background: #0a0a0a;
       color: white;
       min-height: 100vh;
-      overflow: hidden;
+      overflow-y: auto;           /* Permite rolar para baixo */
       position: relative;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 30px 20px;
+      padding: 40px 20px;
     }
 
     /* Fundo de bolinhas vermelhas */
@@ -57,7 +56,7 @@
       border-radius: 16px;
       border: 3px solid #000000;
       width: 100%;
-      max-width: 680px;
+      max-width: 620px;           /* Tamanho justo */
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
 
@@ -71,13 +70,13 @@
     .main-box ol {
       list-style: none;
       counter-reset: item;
-      max-width: 580px;
+      max-width: 550px;
       margin: 0 auto;
     }
 
     .main-box li {
       counter-increment: item;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
       padding-left: 38px;
       font-size: 16.5px;
       line-height: 1.45;
@@ -93,14 +92,14 @@
       width: 30px;
     }
 
-    /* Caixas de resposta pequenas */
+    /* Caixas de texto pequenas */
     .answer-box {
       margin-top: 10px;
     }
 
     .answer-box textarea {
       width: 100%;
-      min-height: 80px;        /* Caixas menores */
+      min-height: 75px;           /* Ainda menor */
       padding: 12px;
       background: #111;
       color: white;
@@ -117,7 +116,7 @@
 
     .btn {
       display: block;
-      margin: 30px auto 0;
+      margin: 35px auto 0;
       padding: 14px 60px;
       background: #ff2222;
       color: white;
@@ -145,7 +144,6 @@
     <h2>Formulário para Staff - Xits Free</h2>
     
     <ol>
-      <!-- Item 1 -->
       <li>
         <strong>Bote o seu nick do Discord aqui para começar o formulário!</strong>
         <div class="answer-box">
@@ -153,7 +151,6 @@
         </div>
       </li>
 
-      <!-- Item 2 -->
       <li>
         <strong>Porque você quer virar Staff no Xits Free?</strong>
         <div class="answer-box">
@@ -161,7 +158,6 @@
         </div>
       </li>
 
-      <!-- Item 3 -->
       <li>
         <strong>O que aconteceria se tivesse uma invasão no servidor sem eu estar on? O que você faria nessa situação?</strong>
         <div class="answer-box">
@@ -169,7 +165,6 @@
         </div>
       </li>
 
-      <!-- Item 4 -->
       <li>
         <strong>Se dois membros estivessem brigando, o que você faria?</strong>
         <div class="answer-box">
@@ -177,7 +172,6 @@
         </div>
       </li>
 
-      <!-- Item 5 -->
       <li>
         <strong>Se uma pessoa estiver vendendo xits sem a minha autorização, você vai fazer oque?</strong>
         <div class="answer-box">
@@ -185,7 +179,6 @@
         </div>
       </li>
 
-      <!-- Item 6 -->
       <li>
         <strong>Se uma pessoa estiver postando links de servidor sem a minha autorização, você vai fazer oque?</strong>
         <div class="answer-box">
@@ -193,7 +186,6 @@
         </div>
       </li>
 
-      <!-- Item 7 -->
       <li>
         <strong>Se uma pessoa estiver postando fotos inapropriadas, você ira agir como?</strong>
         <div class="answer-box">
@@ -201,7 +193,6 @@
         </div>
       </li>
 
-      <!-- Item 8 -->
       <li>
         <strong>Se uma pessoa estiver spamando a mesma mensagem no canal de xit ou chat, você ira fazer oque?</strong>
         <div class="answer-box">
@@ -209,7 +200,6 @@
         </div>
       </li>
 
-      <!-- Item 9 -->
       <li>
         <strong>Se você está em uma briga com um membro do servidor e ele te xinga, você reagiria como? Calmo ou bravo? (Explique a sua resposta)</strong>
         <div class="answer-box">
@@ -217,7 +207,6 @@
         </div>
       </li>
 
-      <!-- Item 10 -->
       <li>
         <strong>Se uma pessoa xinga o dono e fala que vai matar todo mundo, você ira fazer oque?</strong>
         <div class="answer-box">
@@ -267,13 +256,11 @@
 
     function enviarFormulario() {
       const nick = document.getElementById('discord-nick').value.trim();
-      
       if (nick === "") {
         alert("Por favor, preencha seu nick do Discord!");
         return;
       }
-
-      alert("✅ Formulário enviado com sucesso!\n\nNick: " + nick + "\n\nObrigado por responder!");
+      alert("✅ Formulário enviado com sucesso!\n\nNick: " + nick);
     }
   </script>
 
