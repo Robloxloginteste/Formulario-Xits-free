@@ -57,7 +57,7 @@
       border-radius: 16px;
       border: 3px solid #000000;
       width: 100%;
-      max-width: 620px;        /* Caixa menor */
+      max-width: 680px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
 
@@ -71,7 +71,7 @@
     .main-box ol {
       list-style: none;
       counter-reset: item;
-      max-width: 550px;
+      max-width: 580px;
       margin: 0 auto;
     }
 
@@ -93,14 +93,14 @@
       width: 30px;
     }
 
-    /* Caixas de resposta menores */
+    /* Caixas de resposta pequenas */
     .answer-box {
       margin-top: 10px;
     }
 
     .answer-box textarea {
       width: 100%;
-      min-height: 85px;        /* Caixas bem menores */
+      min-height: 80px;        /* Caixas menores */
       padding: 12px;
       background: #111;
       color: white;
@@ -117,8 +117,8 @@
 
     .btn {
       display: block;
-      margin: 25px auto 0;
-      padding: 13px 55px;
+      margin: 30px auto 0;
+      padding: 14px 60px;
       background: #ff2222;
       color: white;
       border: none;
@@ -176,6 +176,54 @@
           <textarea id="pergunta4" placeholder="Escreva sua resposta aqui..."></textarea>
         </div>
       </li>
+
+      <!-- Item 5 -->
+      <li>
+        <strong>Se uma pessoa estiver vendendo xits sem a minha autorização, você vai fazer oque?</strong>
+        <div class="answer-box">
+          <textarea id="pergunta5" placeholder="Escreva sua resposta aqui..."></textarea>
+        </div>
+      </li>
+
+      <!-- Item 6 -->
+      <li>
+        <strong>Se uma pessoa estiver postando links de servidor sem a minha autorização, você vai fazer oque?</strong>
+        <div class="answer-box">
+          <textarea id="pergunta6" placeholder="Escreva sua resposta aqui..."></textarea>
+        </div>
+      </li>
+
+      <!-- Item 7 -->
+      <li>
+        <strong>Se uma pessoa estiver postando fotos inapropriadas, você ira agir como?</strong>
+        <div class="answer-box">
+          <textarea id="pergunta7" placeholder="Escreva sua resposta aqui..."></textarea>
+        </div>
+      </li>
+
+      <!-- Item 8 -->
+      <li>
+        <strong>Se uma pessoa estiver spamando a mesma mensagem no canal de xit ou chat, você ira fazer oque?</strong>
+        <div class="answer-box">
+          <textarea id="pergunta8" placeholder="Escreva sua resposta aqui..."></textarea>
+        </div>
+      </li>
+
+      <!-- Item 9 -->
+      <li>
+        <strong>Se você está em uma briga com um membro do servidor e ele te xinga, você reagiria como? Calmo ou bravo? (Explique a sua resposta)</strong>
+        <div class="answer-box">
+          <textarea id="pergunta9" placeholder="Escreva sua resposta aqui..."></textarea>
+        </div>
+      </li>
+
+      <!-- Item 10 -->
+      <li>
+        <strong>Se uma pessoa xinga o dono e fala que vai matar todo mundo, você ira fazer oque?</strong>
+        <div class="answer-box">
+          <textarea id="pergunta10" placeholder="Escreva sua resposta aqui..."></textarea>
+        </div>
+      </li>
     </ol>
 
     <button class="btn" onclick="enviarFormulario()">Enviar Formulário</button>
@@ -225,7 +273,7 @@
         return;
       }
 
-      alert("✅ Formulário enviado com sucesso!\n\nNick: " + nick);
+      alert("✅ Formulário enviado com sucesso!\n\nNick: " + nick + "\n\nObrigado por responder!");
     }
   </script>
 
