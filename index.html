@@ -16,7 +16,7 @@
       background: #0a0a0a;
       color: white;
       min-height: 100vh;
-      overflow-y: auto;           /* Permite rolar para baixo */
+      overflow-y: auto;
       position: relative;
       display: flex;
       justify-content: center;
@@ -32,6 +32,7 @@
       height: 100%;
       pointer-events: none;
       z-index: 1;
+      overflow: hidden;
     }
 
     .particle {
@@ -39,15 +40,37 @@
       background: #ff2222;
       border-radius: 50%;
       box-shadow: 0 0 8px #ff5555;
-      animation: fall linear infinite;
+      animation: fall linear forwards;
+      top: -20px; /* Começa sempre de cima */
     }
 
     @keyframes fall {
-      0% { transform: translateY(-100px); }
-      100% { transform: translateY(calc(100vh + 100px)); }
+      to {
+        transform: translateY(calc(100vh + 100px));
+      }
     }
 
-    /* Caixa principal - tamanho justo e compacto */
+    /* Círculo preto para foto */
+    .photo-circle {
+      position: relative;
+      z-index: 3;
+      width: 160px;
+      height: 160px;
+      background: #000000;
+      border: 5px solid #ff4444;
+      border-radius: 50%;
+      margin: 0 auto 25px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(255, 68, 68, 0.4);
+    }
+
+    .photo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Caixa principal */
     .main-box {
       position: relative;
       z-index: 2;
@@ -56,7 +79,7 @@
       border-radius: 16px;
       border: 3px solid #000000;
       width: 100%;
-      max-width: 620px;           /* Tamanho justo */
+      max-width: 620px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
 
@@ -92,14 +115,13 @@
       width: 30px;
     }
 
-    /* Caixas de texto pequenas */
     .answer-box {
       margin-top: 10px;
     }
 
     .answer-box textarea {
       width: 100%;
-      min-height: 75px;           /* Ainda menor */
+      min-height: 75px;
       padding: 12px;
       background: #111;
       color: white;
@@ -141,6 +163,12 @@
 
   <!-- Caixa principal -->
   <div class="main-box">
+
+    <!-- Círculo preto para foto -->
+    <div class="photo-circle">
+      <img id="profile-photo" src="https://via.placeholder.com/160" alt="Sua Foto">
+    </div>
+
     <h2>Formulário para Staff - Xits Free</h2>
     
     <ol>
@@ -225,34 +253,43 @@
       const particle = document.createElement('div');
       particle.classList.add('particle');
 
-      const size = Math.random() * 14 + 5;
+      // Tamanhos variados
+      const size = Math.random() * 13 + 6;
       particle.style.width = `${size}px`;
       particle.style.height = `${size}px`;
 
+      // Posição horizontal aleatória
       particle.style.left = `${Math.random() * 100}vw`;
-      const duration = Math.random() * 9 + 8;
+
+      // Duração da queda (mais lenta = mais suave)
+      const duration = Math.random() * 10 + 9; // entre 9s e 19s
       particle.style.animationDuration = `${duration}s`;
-      particle.style.animationDelay = `-${Math.random() * 15}s`;
-      particle.style.opacity = Math.random() * 0.4 + 0.65;
 
       background.appendChild(particle);
 
-      setTimeout(() => particle.remove(), (duration + 3) * 1000);
+      // Remove quando sair da tela e cria uma nova
+      setTimeout(() => {
+        particle.remove();
+        createParticle(); // Gera nova bolinha no topo
+      }, duration * 1000);
     }
 
-    function startAnimation() {
-      setInterval(() => {
-        for (let i = 0; i < 3; i++) {
+    // Inicia as bolinhas
+    function startParticles() {
+      // Cria bolinhas iniciais
+      for (let i = 0; i < 35; i++) {
+        setTimeout(() => {
           createParticle();
-        }
-      }, 90);
+        }, i * 80);
+      }
+
+      // Mantém gerando novas bolinhas continuamente
+      setInterval(() => {
+        createParticle();
+      }, 280);
     }
 
-    startAnimation();
-
-    for (let i = 0; i < 90; i++) {
-      createParticle();
-    }
+    startParticles();
 
     function enviarFormulario() {
       const nick = document.getElementById('discord-nick').value.trim();
@@ -262,6 +299,9 @@
       }
       alert("✅ Formulário enviado com sucesso!\n\nNick: " + nick);
     }
+
+    // Para trocar a foto, troque o link abaixo:
+    // document.getElementById('profile-photo').src = "https://seu-link-da-foto.com/foto.jpg";
   </script>
 
 </body>
