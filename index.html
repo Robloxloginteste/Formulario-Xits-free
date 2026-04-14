@@ -19,8 +19,7 @@
       padding: 40px 20px;
     }
 
-    /* Canvas do fundo */
-    #canvas {
+    canvas {
       position: fixed;
       top: 0;
       left: 0;
@@ -50,7 +49,7 @@
       object-fit: cover;
     }
 
-    /* Caixa do formulário */
+    /* Formulário */
     .main-box {
       position: relative;
       z-index: 2;
@@ -135,7 +134,6 @@
       transform: scale(1.05);
     }
 
-    /* Aviso */
     #error-message {
       position: fixed;
       bottom: -80px;
@@ -155,10 +153,8 @@
 </head>
 <body>
 
-  <!-- Canvas para as bolinhas -->
   <canvas id="canvas"></canvas>
 
-  <!-- Caixa principal -->
   <div class="main-box">
     <div class="photo-circle">
       <img id="profile-photo" src="https://via.placeholder.com/160" alt="Sua Foto">
@@ -202,7 +198,6 @@
     <button class="btn" onclick="enviarFormulario()">Enviar Formulário</button>
   </div>
 
-  <!-- Aviso -->
   <div id="error-message">Preencha todas as caixas com uma resposta e depois clique em enviar formulário!</div>
 
   <script>
@@ -215,22 +210,27 @@
       constructor() {
         this.reset();
       }
+
       reset() {
         this.x = Math.random() * width;
-        this.y = -20 - Math.random() * 100; // começa acima da tela
-        this.size = Math.random() * 13 + 6;
-        this.speed = Math.random() * 3 + 4; // velocidade variada
-        this.opacity = Math.random() * 0.4 + 0.7;
+        this.y = -50 - Math.random() * 150;     // começa bem acima
+        this.size = Math.random() * 11 + 4;     // tamanhos variados: 4px até 15px
+        this.speed = Math.random() * 1.8 + 2.2; // velocidade leve e suave (bem devagar)
+        this.opacity = Math.random() * 0.35 + 0.65;
       }
+
       update() {
         this.y += this.speed;
-        if (this.y > height + 50) this.reset();
+        if (this.y > height + 50) {
+          this.reset();
+        }
       }
+
       draw() {
         ctx.save();
         ctx.globalAlpha = this.opacity;
         ctx.fillStyle = '#ff2222';
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = 12;
         ctx.shadowColor = '#ff5555';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -247,50 +247,52 @@
     }
 
     function animate() {
-      // Fade suave para efeito bonito (não apaga totalmente)
-      ctx.fillStyle = 'rgba(10, 10, 10, 0.12)';
+      ctx.fillStyle = 'rgba(10, 10, 10, 0.15)';   // fade suave para efeito leve
       ctx.fillRect(0, 0, width, height);
 
       for (let i = 0; i < particles.length; i++) {
         particles[i].update();
         particles[i].draw();
       }
+
       requestAnimationFrame(animate);
     }
 
-    // Criar muitas partículas
+    // Iniciar partículas
     function initParticles() {
       particles = [];
-      for (let i = 0; i < 180; i++) {  // 180 bolinhas para ficar bem cheio
+      for (let i = 0; i < 140; i++) {        // quantidade boa e leve
         particles.push(new Particle());
       }
     }
 
-    // Iniciar tudo
     window.addEventListener('resize', () => {
       resizeCanvas();
       initParticles();
     });
 
+    // Inicialização
     resizeCanvas();
     initParticles();
     animate();
 
-    // Validação do formulário (mesma de antes)
+    // ====================== Validação do Formulário ======================
     const errorMessage = document.getElementById('error-message');
 
     function enviarFormulario() {
-      const campos = ['discord-nick','pergunta2','pergunta3','pergunta4','pergunta5','pergunta6','pergunta7','pergunta8','pergunta9','pergunta10'];
-      let completo = true;
+      const campos = ['discord-nick','pergunta2','pergunta3','pergunta4','pergunta5',
+                      'pergunta6','pergunta7','pergunta8','pergunta9','pergunta10'];
+
+      let todosPreenchidos = true;
 
       for (let id of campos) {
         if (!document.getElementById(id).value.trim()) {
-          completo = false;
+          todosPreenchidos = false;
           break;
         }
       }
 
-      if (!completo) {
+      if (!todosPreenchidos) {
         errorMessage.style.bottom = '30px';
         setTimeout(() => {
           errorMessage.style.bottom = '-80px';
