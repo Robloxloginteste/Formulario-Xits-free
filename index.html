@@ -18,6 +18,9 @@
       min-height: 100vh;
       overflow: hidden;
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     /* Fundo de bolinhas vermelhas */
@@ -35,36 +38,39 @@
       position: absolute;
       background: #ff2222;
       border-radius: 50%;
-      opacity: 0.85;
       box-shadow: 0 0 8px #ff5555;
       animation: fall linear infinite;
     }
 
     @keyframes fall {
-      0% {
-        transform: translateY(-100px);
-      }
-      100% {
-        transform: translateY(calc(100vh + 100px));
-      }
+      0% { transform: translateY(-100px); }
+      100% { transform: translateY(calc(100vh + 100px)); }
     }
 
-    /* Formulário centralizado */
-    .form-container {
+    /* Container principal */
+    .main-container {
       position: relative;
       z-index: 2;
-      max-width: 500px;
-      margin: 80px auto;
+      display: flex;
+      gap: 60px;
+      max-width: 1100px;
       padding: 40px;
+    }
+
+    /* Formulário com bordas pretas */
+    .form-container {
       background: rgba(20, 20, 20, 0.95);
+      padding: 40px;
       border-radius: 16px;
       box-shadow: 0 10px 30px rgba(255, 50, 50, 0.2);
-      text-align: center;
+      border: 3px solid #000000;
+      width: 480px;
     }
 
     h1 {
       margin-bottom: 30px;
       color: #ff4444;
+      text-align: center;
     }
 
     input, textarea, button {
@@ -77,8 +83,9 @@
     }
 
     input, textarea {
-      background: #222;
+      background: #1a1a1a;
       color: white;
+      border: 2px solid #333;
     }
 
     button {
@@ -87,6 +94,7 @@
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
+      margin-top: 10px;
     }
 
     button:hover {
@@ -100,6 +108,45 @@
       margin: 8px 0 4px;
       font-size: 14px;
     }
+
+    /* Lista ao lado */
+    .list-container {
+      background: rgba(20, 20, 20, 0.9);
+      padding: 40px;
+      border-radius: 16px;
+      border: 3px solid #000000;
+      width: 420px;
+      color: #ddd;
+    }
+
+    .list-container h2 {
+      color: #ff4444;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .list-container ol {
+      list-style: none;
+      counter-reset: item;
+    }
+
+    .list-container li {
+      counter-increment: item;
+      margin-bottom: 22px;
+      padding-left: 10px;
+      font-size: 17.5px;
+      line-height: 1.4;
+      position: relative;
+    }
+
+    .list-container li:before {
+      content: counter(item) ".";
+      color: #ff4444;
+      font-weight: bold;
+      position: absolute;
+      left: -28px;
+      width: 25px;
+    }
   </style>
 </head>
 <body>
@@ -107,21 +154,41 @@
   <!-- Fundo animado -->
   <div class="background" id="background"></div>
 
-  <!-- Formulário -->
-  <div class="form-container">
-    <h1>Entre em Contato</h1>
-    <form>
-      <label for="nome">Nome</label>
-      <input type="text" id="nome" placeholder="Seu nome" required>
+  <div class="main-container">
+    
+    <!-- Formulário -->
+    <div class="form-container">
+      <h1>Entre em Contato</h1>
+      <form>
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" placeholder="Seu nome" required>
 
-      <label for="email">Email</label>
-      <input type="email" id="email" placeholder="seu@email.com" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="seu@email.com" required>
 
-      <label for="mensagem">Mensagem</label>
-      <textarea id="mensagem" rows="6" placeholder="Escreva sua mensagem..."></textarea>
+        <label for="mensagem">Mensagem</label>
+        <textarea id="mensagem" rows="5" placeholder="Escreva sua mensagem..."></textarea>
 
-      <button type="submit">Enviar</button>
-    </form>
+        <button type="submit">Enviar Mensagem</button>
+      </form>
+    </div>
+
+    <!-- Lista com o texto solicitado -->
+    <div class="list-container">
+      <h2>Instruções</h2>
+      <ol>
+        <li><strong>Bote o seu nick do Discord aqui para começar o formulário!</strong></li>
+        <li>Segundo item da lista</li>
+        <li>Terceiro item da lista</li>
+        <li>Quarto item da lista</li>
+        <li>Quinto item da lista</li>
+        <li>Sexto item da lista</li>
+        <li>Sétimo item da lista</li>
+        <li>Oitavo item da lista</li>
+        <li>Nono item da lista</li>
+      </ol>
+    </div>
+
   </div>
 
   <script>
@@ -131,47 +198,32 @@
       const particle = document.createElement('div');
       particle.classList.add('particle');
 
-      // Tamanhos variados: pequeno, médio e grande
-      const size = Math.random() * 12 + 4; // entre 4px e 16px
+      const size = Math.random() * 14 + 5;
       particle.style.width = `${size}px`;
       particle.style.height = `${size}px`;
 
-      // Posição horizontal aleatória
       particle.style.left = `${Math.random() * 100}vw`;
-
-      // Duração da animação (quanto maior, mais lenta - parece mais distante)
-      const duration = Math.random() * 8 + 7; // entre 7s e 15s
+      const duration = Math.random() * 9 + 8;
       particle.style.animationDuration = `${duration}s`;
-
-      // Atraso inicial para não começar todas juntas
       particle.style.animationDelay = `-${Math.random() * 15}s`;
-
-      // Opacidade um pouco diferente para mais naturalidade
-      particle.style.opacity = Math.random() * 0.4 + 0.6;
+      particle.style.opacity = Math.random() * 0.4 + 0.65;
 
       background.appendChild(particle);
 
-      // Remove a bolinha depois que ela sai da tela para não sobrecarregar
-      setTimeout(() => {
-        particle.remove();
-      }, (duration + 2) * 1000);
+      setTimeout(() => particle.remove(), (duration + 3) * 1000);
     }
 
-    // Cria muitas bolinhas
     function startAnimation() {
-      // Cria bolinhas continuamente
       setInterval(() => {
-        for (let i = 0; i < 3; i++) {  // 3 por vez para ficar mais denso
+        for (let i = 0; i < 3; i++) {
           createParticle();
         }
-      }, 80);
+      }, 90);
     }
 
-    // Inicia a animação
     startAnimation();
 
-    // Para ficar ainda mais cheio no começo
-    for (let i = 0; i < 80; i++) {
+    for (let i = 0; i < 90; i++) {
       createParticle();
     }
   </script>
