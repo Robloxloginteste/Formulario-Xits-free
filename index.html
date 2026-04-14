@@ -213,15 +213,15 @@
 
       reset() {
         this.x = Math.random() * width;
-        this.y = -50 - Math.random() * 150;     // começa bem acima
-        this.size = Math.random() * 11 + 4;     // tamanhos variados: 4px até 15px
-        this.speed = Math.random() * 1.8 + 2.2; // velocidade leve e suave (bem devagar)
-        this.opacity = Math.random() * 0.35 + 0.65;
+        this.y = -60 - Math.random() * 200;        // começa bem acima da tela
+        this.size = Math.random() * 12 + 5;        // tamanhos variados: pequenas, médias e grandes
+        this.speed = Math.random() * 1.2 + 1.8;    // velocidade bem lenta e suave
+        this.opacity = Math.random() * 0.3 + 0.75;
       }
 
       update() {
         this.y += this.speed;
-        if (this.y > height + 50) {
+        if (this.y > height + 80) {
           this.reset();
         }
       }
@@ -230,8 +230,8 @@
         ctx.save();
         ctx.globalAlpha = this.opacity;
         ctx.fillStyle = '#ff2222';
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = '#ff5555';
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#ff4444';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -247,7 +247,8 @@
     }
 
     function animate() {
-      ctx.fillStyle = 'rgba(10, 10, 10, 0.15)';   // fade suave para efeito leve
+      // Fundo escuro limpo (sem rastro forte)
+      ctx.fillStyle = 'rgba(10, 10, 10, 0.25)';
       ctx.fillRect(0, 0, width, height);
 
       for (let i = 0; i < particles.length; i++) {
@@ -258,45 +259,41 @@
       requestAnimationFrame(animate);
     }
 
-    // Iniciar partículas
     function initParticles() {
       particles = [];
-      for (let i = 0; i < 140; i++) {        // quantidade boa e leve
+      for (let i = 0; i < 130; i++) {     // quantidade boa e suave
         particles.push(new Particle());
       }
     }
 
+    // Resize automático
     window.addEventListener('resize', () => {
       resizeCanvas();
       initParticles();
     });
 
-    // Inicialização
+    // Iniciar
     resizeCanvas();
     initParticles();
     animate();
 
-    // ====================== Validação do Formulário ======================
+    // ====================== Validação ======================
     const errorMessage = document.getElementById('error-message');
 
     function enviarFormulario() {
-      const campos = ['discord-nick','pergunta2','pergunta3','pergunta4','pergunta5',
-                      'pergunta6','pergunta7','pergunta8','pergunta9','pergunta10'];
-
-      let todosPreenchidos = true;
-
+      const campos = ['discord-nick','pergunta2','pergunta3','pergunta4','pergunta5','pergunta6','pergunta7','pergunta8','pergunta9','pergunta10'];
+      
+      let completo = true;
       for (let id of campos) {
         if (!document.getElementById(id).value.trim()) {
-          todosPreenchidos = false;
+          completo = false;
           break;
         }
       }
 
-      if (!todosPreenchidos) {
+      if (!completo) {
         errorMessage.style.bottom = '30px';
-        setTimeout(() => {
-          errorMessage.style.bottom = '-80px';
-        }, 3000);
+        setTimeout(() => { errorMessage.style.bottom = '-80px'; }, 3000);
       } else {
         alert("✅ Formulário enviado com sucesso!");
       }
