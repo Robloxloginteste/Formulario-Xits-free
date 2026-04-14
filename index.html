@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulário com Bolinhas Vermelhas</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: white;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Fundo de bolinhas vermelhas */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      background: #ff2222;
+      border-radius: 50%;
+      opacity: 0.85;
+      box-shadow: 0 0 8px #ff5555;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px);
+      }
+      100% {
+        transform: translateY(calc(100vh + 100px));
+      }
+    }
+
+    /* Formulário centralizado */
+    .form-container {
+      position: relative;
+      z-index: 2;
+      max-width: 500px;
+      margin: 80px auto;
+      padding: 40px;
+      background: rgba(20, 20, 20, 0.95);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(255, 50, 50, 0.2);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      color: #ff4444;
+    }
+
+    input, textarea, button {
+      width: 100%;
+      padding: 14px;
+      margin: 12px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    input, textarea {
+      background: #222;
+      color: white;
+    }
+
+    button {
+      background: #ff2222;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ff5555;
+      transform: scale(1.05);
+    }
+
+    label {
+      display: block;
+      text-align: left;
+      margin: 8px 0 4px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fundo animado -->
+  <div class="background" id="background"></div>
+
+  <!-- Formulário -->
+  <div class="form-container">
+    <h1>Entre em Contato</h1>
+    <form>
+      <label for="nome">Nome</label>
+      <input type="text" id="nome" placeholder="Seu nome" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="seu@email.com" required>
+
+      <label for="mensagem">Mensagem</label>
+      <textarea id="mensagem" rows="6" placeholder="Escreva sua mensagem..."></textarea>
+
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+
+  <script>
+    const background = document.getElementById('background');
+
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+
+      // Tamanhos variados: pequeno, médio e grande
+      const size = Math.random() * 12 + 4; // entre 4px e 16px
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+
+      // Posição horizontal aleatória
+      particle.style.left = `${Math.random() * 100}vw`;
+
+      // Duração da animação (quanto maior, mais lenta - parece mais distante)
+      const duration = Math.random() * 8 + 7; // entre 7s e 15s
+      particle.style.animationDuration = `${duration}s`;
+
+      // Atraso inicial para não começar todas juntas
+      particle.style.animationDelay = `-${Math.random() * 15}s`;
+
+      // Opacidade um pouco diferente para mais naturalidade
+      particle.style.opacity = Math.random() * 0.4 + 0.6;
+
+      background.appendChild(particle);
+
+      // Remove a bolinha depois que ela sai da tela para não sobrecarregar
+      setTimeout(() => {
+        particle.remove();
+      }, (duration + 2) * 1000);
+    }
+
+    // Cria muitas bolinhas
+    function startAnimation() {
+      // Cria bolinhas continuamente
+      setInterval(() => {
+        for (let i = 0; i < 3; i++) {  // 3 por vez para ficar mais denso
+          createParticle();
+        }
+      }, 80);
+    }
+
+    // Inicia a animação
+    startAnimation();
+
+    // Para ficar ainda mais cheio no começo
+    for (let i = 0; i < 80; i++) {
+      createParticle();
+    }
+  </script>
+
+</body>
+</html>
