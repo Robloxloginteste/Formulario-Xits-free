@@ -5,11 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Formulário Staff - Xits Free</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: Arial, sans-serif;
@@ -23,40 +19,24 @@
       padding: 40px 20px;
     }
 
-    /* Fundo de bolinhas vermelhas */
-    .background {
+    /* Canvas do fundo */
+    #canvas {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      pointer-events: none;
       z-index: 1;
-      overflow: hidden;
+      pointer-events: none;
     }
 
-    .particle {
-      position: absolute;
-      background: #ff2222;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #ff5555;
-      animation: fall linear forwards;
-      top: -20px; /* Começa sempre de cima */
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(calc(100vh + 100px));
-      }
-    }
-
-    /* Círculo preto para foto */
+    /* Círculo da foto */
     .photo-circle {
       position: relative;
       z-index: 3;
       width: 160px;
       height: 160px;
-      background: #000000;
+      background: #000;
       border: 5px solid #ff4444;
       border-radius: 50%;
       margin: 0 auto 25px;
@@ -70,7 +50,7 @@
       object-fit: cover;
     }
 
-    /* Caixa principal */
+    /* Caixa do formulário */
     .main-box {
       position: relative;
       z-index: 2;
@@ -154,17 +134,32 @@
       background: #ff5555;
       transform: scale(1.05);
     }
+
+    /* Aviso */
+    #error-message {
+      position: fixed;
+      bottom: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ff2222;
+      color: white;
+      padding: 14px 30px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: bold;
+      z-index: 10;
+      transition: all 0.4s ease;
+      box-shadow: 0 5px 15px rgba(255, 34, 34, 0.5);
+    }
   </style>
 </head>
 <body>
 
-  <!-- Fundo animado -->
-  <div class="background" id="background"></div>
+  <!-- Canvas para as bolinhas -->
+  <canvas id="canvas"></canvas>
 
   <!-- Caixa principal -->
   <div class="main-box">
-
-    <!-- Círculo preto para foto -->
     <div class="photo-circle">
       <img id="profile-photo" src="https://via.placeholder.com/160" alt="Sua Foto">
     </div>
@@ -172,137 +167,138 @@
     <h2>Formulário para Staff - Xits Free</h2>
     
     <ol>
-      <li>
-        <strong>Bote o seu nick do Discord aqui para começar o formulário!</strong>
-        <div class="answer-box">
-          <textarea id="discord-nick" placeholder="Ex: Victor#1234 ou Victor" maxlength="50" rows="2"></textarea>
-        </div>
+      <li><strong>Bote o seu nick do Discord aqui para começar o formulário!</strong>
+        <div class="answer-box"><textarea id="discord-nick" placeholder="Ex: Victor#1234 ou Victor" rows="2"></textarea></div>
       </li>
-
-      <li>
-        <strong>Porque você quer virar Staff no Xits Free?</strong>
-        <div class="answer-box">
-          <textarea id="pergunta2" placeholder="Escreva sua resposta aqui..."></textarea>
-        </div>
+      <li><strong>Porque você quer virar Staff no Xits Free?</strong>
+        <div class="answer-box"><textarea id="pergunta2" placeholder="Escreva sua resposta aqui..."></textarea></div>
       </li>
-
-      <li>
-        <strong>O que aconteceria se tivesse uma invasão no servidor sem eu estar on? O que você faria nessa situação?</strong>
-        <div class="answer-box">
-          <textarea id="pergunta3" placeholder="Escreva sua resposta aqui..."></textarea>
-        </div>
+      <li><strong>O que aconteceria se tivesse uma invasão no servidor sem eu estar on? O que você faria nessa situação?</strong>
+        <div class="answer-box"><textarea id="pergunta3" placeholder="Escreva sua resposta aqui..."></textarea></div>
       </li>
-
-      <li>
-        <strong>Se dois membros estivessem brigando, o que você faria?</strong>
-        <div class="answer-box">
-          <textarea id="pergunta4" placeholder="Escreva sua resposta aqui..."></textarea>
-        </div>
+      <li><strong>Se dois membros estivessem brigando, o que você faria?</strong>
+        <div class="answer-box"><textarea id="pergunta4" placeholder="Escreva sua resposta aqui..."></textarea></div>
       </li>
-
-      <li>
-        <strong>Se uma pessoa estiver vendendo xits sem a minha autorização, você vai fazer oque?</strong>
-        <div class="answer-box">
-          <textarea id="pergunta5" placeholder="Escreva sua resposta aqui..."></textarea>
-        </div>
+      <li><strong>Se uma pessoa estiver vendendo xits sem a minha autorização, você vai fazer oque?</strong>
+        <div class="answer-box"><textarea id="pergunta5" placeholder="Escreva sua resposta aqui..."></textarea></div>
       </li>
-
-      <li>
-        <strong>Se uma pessoa estiver postando links de servidor sem a minha autorização, você vai fazer oque?</strong>
-        <div class="answer-box">
-          <textarea id="pergunta6" placeholder="Escreva sua resposta aqui..."></textarea>
-        </div>
+      <li><strong>Se uma pessoa estiver postando links de servidor sem a minha autorização, você vai fazer oque?</strong>
+        <div class="answer-box"><textarea id="pergunta6" placeholder="Escreva sua resposta aqui..."></textarea></div>
       </li>
-
-      <li>
-        <strong>Se uma pessoa estiver postando fotos inapropriadas, você ira agir como?</strong>
-        <div class="answer-box">
-          <textarea id="pergunta7" placeholder="Escreva sua resposta aqui..."></textarea>
-        </div>
+      <li><strong>Se uma pessoa estiver postando fotos inapropriadas, você ira agir como?</strong>
+        <div class="answer-box"><textarea id="pergunta7" placeholder="Escreva sua resposta aqui..."></textarea></div>
       </li>
-
-      <li>
-        <strong>Se uma pessoa estiver spamando a mesma mensagem no canal de xit ou chat, você ira fazer oque?</strong>
-        <div class="answer-box">
-          <textarea id="pergunta8" placeholder="Escreva sua resposta aqui..."></textarea>
-        </div>
+      <li><strong>Se uma pessoa estiver spamando a mesma mensagem no canal de xit ou chat, você ira fazer oque?</strong>
+        <div class="answer-box"><textarea id="pergunta8" placeholder="Escreva sua resposta aqui..."></textarea></div>
       </li>
-
-      <li>
-        <strong>Se você está em uma briga com um membro do servidor e ele te xinga, você reagiria como? Calmo ou bravo? (Explique a sua resposta)</strong>
-        <div class="answer-box">
-          <textarea id="pergunta9" placeholder="Escreva sua resposta aqui..."></textarea>
-        </div>
+      <li><strong>Se você está em uma briga com um membro do servidor e ele te xinga, você reagiria como? Calmo ou bravo? (Explique a sua resposta)</strong>
+        <div class="answer-box"><textarea id="pergunta9" placeholder="Escreva sua resposta aqui..."></textarea></div>
       </li>
-
-      <li>
-        <strong>Se uma pessoa xinga o dono e fala que vai matar todo mundo, você ira fazer oque?</strong>
-        <div class="answer-box">
-          <textarea id="pergunta10" placeholder="Escreva sua resposta aqui..."></textarea>
-        </div>
+      <li><strong>Se uma pessoa xinga o dono e fala que vai matar todo mundo, você ira fazer oque?</strong>
+        <div class="answer-box"><textarea id="pergunta10" placeholder="Escreva sua resposta aqui..."></textarea></div>
       </li>
     </ol>
 
     <button class="btn" onclick="enviarFormulario()">Enviar Formulário</button>
   </div>
 
+  <!-- Aviso -->
+  <div id="error-message">Preencha todas as caixas com uma resposta e depois clique em enviar formulário!</div>
+
   <script>
-    const background = document.getElementById('background');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let width, height;
 
-    function createParticle() {
-      const particle = document.createElement('div');
-      particle.classList.add('particle');
-
-      // Tamanhos variados
-      const size = Math.random() * 13 + 6;
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-
-      // Posição horizontal aleatória
-      particle.style.left = `${Math.random() * 100}vw`;
-
-      // Duração da queda (mais lenta = mais suave)
-      const duration = Math.random() * 10 + 9; // entre 9s e 19s
-      particle.style.animationDuration = `${duration}s`;
-
-      background.appendChild(particle);
-
-      // Remove quando sair da tela e cria uma nova
-      setTimeout(() => {
-        particle.remove();
-        createParticle(); // Gera nova bolinha no topo
-      }, duration * 1000);
-    }
-
-    // Inicia as bolinhas
-    function startParticles() {
-      // Cria bolinhas iniciais
-      for (let i = 0; i < 35; i++) {
-        setTimeout(() => {
-          createParticle();
-        }, i * 80);
+    class Particle {
+      constructor() {
+        this.reset();
       }
-
-      // Mantém gerando novas bolinhas continuamente
-      setInterval(() => {
-        createParticle();
-      }, 280);
+      reset() {
+        this.x = Math.random() * width;
+        this.y = -20 - Math.random() * 100; // começa acima da tela
+        this.size = Math.random() * 13 + 6;
+        this.speed = Math.random() * 3 + 4; // velocidade variada
+        this.opacity = Math.random() * 0.4 + 0.7;
+      }
+      update() {
+        this.y += this.speed;
+        if (this.y > height + 50) this.reset();
+      }
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = '#ff2222';
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = '#ff5555';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
     }
 
-    startParticles();
+    function resizeCanvas() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    }
+
+    function animate() {
+      // Fade suave para efeito bonito (não apaga totalmente)
+      ctx.fillStyle = 'rgba(10, 10, 10, 0.12)';
+      ctx.fillRect(0, 0, width, height);
+
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].update();
+        particles[i].draw();
+      }
+      requestAnimationFrame(animate);
+    }
+
+    // Criar muitas partículas
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < 180; i++) {  // 180 bolinhas para ficar bem cheio
+        particles.push(new Particle());
+      }
+    }
+
+    // Iniciar tudo
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      initParticles();
+    });
+
+    resizeCanvas();
+    initParticles();
+    animate();
+
+    // Validação do formulário (mesma de antes)
+    const errorMessage = document.getElementById('error-message');
 
     function enviarFormulario() {
-      const nick = document.getElementById('discord-nick').value.trim();
-      if (nick === "") {
-        alert("Por favor, preencha seu nick do Discord!");
-        return;
+      const campos = ['discord-nick','pergunta2','pergunta3','pergunta4','pergunta5','pergunta6','pergunta7','pergunta8','pergunta9','pergunta10'];
+      let completo = true;
+
+      for (let id of campos) {
+        if (!document.getElementById(id).value.trim()) {
+          completo = false;
+          break;
+        }
       }
-      alert("✅ Formulário enviado com sucesso!\n\nNick: " + nick);
+
+      if (!completo) {
+        errorMessage.style.bottom = '30px';
+        setTimeout(() => {
+          errorMessage.style.bottom = '-80px';
+        }, 3000);
+      } else {
+        alert("✅ Formulário enviado com sucesso!");
+      }
     }
-
-    // Para trocar a foto, troque o link abaixo:
-    // document.getElementById('profile-photo').src = "https://seu-link-da-foto.com/foto.jpg";
   </script>
-
 </body>
 </html>
