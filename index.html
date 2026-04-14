@@ -132,13 +132,16 @@
       color: white;
       padding: 14px 28px;
       font-size: 15.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     .btn-voltar:hover {
       background: #4752C4;
       transform: scale(1.05);
     }
 
-    /* Mensagem de sucesso (menu de baixo pra cima) */
+    /* Mensagem de sucesso */
     #success-screen {
       position: fixed;
       bottom: -100%;
@@ -248,28 +251,28 @@
     <div class="buttons">
       <button class="btn btn-enviar" onclick="enviarFormulario()">Enviar Formulário</button>
       <button class="btn btn-voltar" onclick="voltarDiscord()">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Discord_Logo.svg/512px-Discord_Logo.svg.png"
-             alt="Discord" width="22" height="22" style="filter: brightness(0) invert(1);">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Discord_Logo.svg" 
+             alt="Discord" width="24" height="24" style="filter: brightness(0) invert(1);">
         Voltar ao Discord
       </button>
     </div>
   </div>
 
-  <!-- Mensagem de Sucesso -->
+  <!-- Tela de Sucesso -->
   <div id="success-screen">
     <div class="success-content">
       <h1>✅ Formulário Enviado!</h1>
       <p><strong>O seu Formulário Foi enviado</strong><br>
       Agora pode sair!<br>
       Obrigado pela compreensão.</p>
-      <button onclick="fecharSuccess()">Fechar</button>
+      <button onclick="voltarParaDiscord()">Voltar ao Discord</button>
     </div>
   </div>
 
   <div id="error-message">Preencha todas as caixas com uma resposta e depois clique em enviar formulário!</div>
 
   <script>
-    // ====================== Canvas Particles ======================
+    // ====================== Canvas Particles (mantido igual) ======================
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     let particles = [];
@@ -315,9 +318,7 @@
 
     function initParticles() {
       particles = [];
-      for (let i = 0; i < 110; i++) {
-        particles.push(new Particle());
-      }
+      for (let i = 0; i < 110; i++) particles.push(new Particle());
     }
 
     window.addEventListener('resize', () => {
@@ -328,11 +329,9 @@
     resizeCanvas();
     initParticles();
     animate();
-    setInterval(() => {
-      if (particles.length < 160) particles.push(new Particle());
-    }, 65);
+    setInterval(() => { if (particles.length < 160) particles.push(new Particle()); }, 65);
 
-    // ====================== Lógica do Formulário ======================
+    // ====================== Formulário ======================
     const errorMessage = document.getElementById('error-message');
     const successScreen = document.getElementById('success-screen');
 
@@ -351,20 +350,16 @@
         errorMessage.style.bottom = '30px';
         setTimeout(() => { errorMessage.style.bottom = '-80px'; }, 3000);
       } else {
-        // Mostra a tela de sucesso deslizando de baixo pra cima
         successScreen.style.display = 'flex';
-        // Força o reflow para a animação funcionar
-        setTimeout(() => {
-          successScreen.classList.add('show');
-        }, 10);
+        setTimeout(() => successScreen.classList.add('show'), 10);
       }
     }
 
-    function fecharSuccess() {
+    function voltarParaDiscord() {
+      window.open("https://discord.com", "_blank");
+      // Fecha a tela de sucesso depois de abrir o Discord
       successScreen.classList.remove('show');
-      setTimeout(() => {
-        successScreen.style.display = 'none';
-      }, 600);
+      setTimeout(() => { successScreen.style.display = 'none'; }, 600);
     }
 
     function voltarDiscord() {
