@@ -339,16 +339,50 @@
     const errorMessage = document.getElementById('error-message');
     const successScreen = document.getElementById('success-screen');
 
-    function enviarFormulario() {
-      const campos = ['discord-nick','pergunta2','pergunta3','pergunta4','pergunta5','pergunta6','pergunta7','pergunta8','pergunta9','pergunta10'];
-      
-      let completo = true;
-      for (let id of campos) {
-        if (!document.getElementById(id).value.trim()) {
-          completo = false;
-          break;
-        }
-      }
+    async function enviarFormulario() {
+  const campos = [
+    'discord-nick','pergunta2','pergunta3','pergunta4','pergunta5',
+    'pergunta6','pergunta7','pergunta8','pergunta9','pergunta10'
+  ];
+
+  let completo = true;
+  let dados = {};
+
+  for (let id of campos) {
+    const value = document.getElementById(id).value.trim();
+
+    if (!value) {
+      completo = false;
+      break;
+    }
+
+    dados[id] = value;
+  }
+
+  if (!completo) {
+    errorMessage.style.bottom = '30px';
+    setTimeout(() => {
+      errorMessage.style.bottom = '-80px';
+    }, 3000);
+    return;
+  }
+
+  try {
+    await fetch("/api/send-form", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(dados)
+    });
+
+    successScreen.style.display = 'flex';
+    setTimeout(() => successScreen.classList.add('show'), 10);
+
+  } catch (err) {
+    alert("Erro ao enviar formulário!");
+  }
+}
 
       if (!completo) {
         errorMessage.style.bottom = '30px';
