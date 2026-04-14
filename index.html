@@ -359,6 +359,7 @@
     dados[id] = value;
   }
 
+  // ❌ se não preencher tudo
   if (!completo) {
     errorMessage.style.bottom = '30px';
     setTimeout(() => {
@@ -370,9 +371,7 @@
   try {
     await fetch("/api/send-form", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(dados)
     });
 
