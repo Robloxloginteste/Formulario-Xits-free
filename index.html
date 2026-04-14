@@ -214,8 +214,8 @@
       reset() {
         this.x = Math.random() * width;
         this.y = -100 - Math.random() * 300;
-        this.size = Math.random() * 14 + 5;        // tamanhos variados
-        this.speed = Math.random() * 1.3 + 1.7;    // devagar e suave
+        this.size = Math.random() * 14 + 5;        // pequenas, médias e grandes
+        this.speed = Math.random() * 1.4 + 1.8;    // velocidade suave
         this.opacity = Math.random() * 0.3 + 0.75;
       }
 
@@ -226,7 +226,7 @@
 
       draw() {
         ctx.globalAlpha = this.opacity;
-        ctx.fillStyle = '#ff0000';   // vermelho normal
+        ctx.fillStyle = '#ff0000';
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -241,7 +241,7 @@
     }
 
     function animate() {
-      ctx.clearRect(0, 0, width, height);   // limpa totalmente (sem trilha)
+      ctx.clearRect(0, 0, width, height);
 
       for (let i = 0; i < particles.length; i++) {
         particles[i].update();
@@ -253,15 +253,16 @@
 
     function initParticles() {
       particles = [];
-      // Mais bolinhas iniciais
-      for (let i = 0; i < 180; i++) {
+      for (let i = 0; i < 110; i++) {        // quantidade inicial média
         particles.push(new Particle());
       }
     }
 
-    // Gera novas bolinhas continuamente (para nunca parar)
+    // Gera novas bolinhas em ritmo médio
     function createNewParticle() {
-      particles.push(new Particle());
+      if (particles.length < 160) {          // limite máximo para não sobrecarregar
+        particles.push(new Particle());
+      }
     }
 
     window.addEventListener('resize', () => {
@@ -274,8 +275,8 @@
     initParticles();
     animate();
 
-    // Cria novas bolinhas o tempo todo (mais denso e constante)
-    setInterval(createNewParticle, 35);   // a cada 35ms aparece uma nova
+    // Bolinhas aparecendo continuamente em ritmo médio
+    setInterval(createNewParticle, 65);   // aparecendo em velocidade média (ajustado)
 
     // Validação do formulário
     const errorMessage = document.getElementById('error-message');
