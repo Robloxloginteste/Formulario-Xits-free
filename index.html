@@ -213,29 +213,23 @@
 
       reset() {
         this.x = Math.random() * width;
-        this.y = -60 - Math.random() * 200;        // começa bem acima da tela
-        this.size = Math.random() * 12 + 5;        // tamanhos variados: pequenas, médias e grandes
-        this.speed = Math.random() * 1.2 + 1.8;    // velocidade bem lenta e suave
-        this.opacity = Math.random() * 0.3 + 0.75;
+        this.y = -80 - Math.random() * 250;
+        this.size = Math.random() * 13 + 4;        // pequenas, médias e grandes
+        this.speed = Math.random() * 1.1 + 1.6;    // bem devagar e suave
+        this.opacity = Math.random() * 0.25 + 0.8;
       }
 
       update() {
         this.y += this.speed;
-        if (this.y > height + 80) {
-          this.reset();
-        }
+        if (this.y > height + 100) this.reset();
       }
 
       draw() {
-        ctx.save();
         ctx.globalAlpha = this.opacity;
-        ctx.fillStyle = '#ff2222';
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = '#ff4444';
+        ctx.fillStyle = '#ff0000';           // vermelho normal
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
-        ctx.restore();
       }
     }
 
@@ -247,9 +241,8 @@
     }
 
     function animate() {
-      // Fundo escuro limpo (sem rastro forte)
-      ctx.fillStyle = 'rgba(10, 10, 10, 0.25)';
-      ctx.fillRect(0, 0, width, height);
+      // Limpa o canvas completamente a cada frame (sem trilha)
+      ctx.clearRect(0, 0, width, height);
 
       for (let i = 0; i < particles.length; i++) {
         particles[i].update();
@@ -261,23 +254,21 @@
 
     function initParticles() {
       particles = [];
-      for (let i = 0; i < 130; i++) {     // quantidade boa e suave
+      for (let i = 0; i < 135; i++) {
         particles.push(new Particle());
       }
     }
 
-    // Resize automático
     window.addEventListener('resize', () => {
       resizeCanvas();
       initParticles();
     });
 
-    // Iniciar
     resizeCanvas();
     initParticles();
     animate();
 
-    // ====================== Validação ======================
+    // Validação do formulário
     const errorMessage = document.getElementById('error-message');
 
     function enviarFormulario() {
