@@ -53,18 +53,18 @@
       position: relative;
       z-index: 2;
       background: rgba(20, 20, 20, 0.95);
-      padding: 40px 50px;
+      padding: 45px 50px;
       border-radius: 16px;
       border: 3px solid #000000;
       width: 100%;
-      max-width: 620px;           /* Tamanho justo, não esticado */
+      max-width: 620px;
       text-align: center;
     }
 
     .main-box h2 {
       color: #ff4444;
-      margin-bottom: 25px;
-      font-size: 23px;
+      margin-bottom: 30px;
+      font-size: 24px;
     }
 
     .main-box ol {
@@ -72,13 +72,13 @@
       counter-reset: item;
       text-align: left;
       max-width: 520px;
-      margin: 0 auto 30px;
+      margin: 0 auto;
     }
 
     .main-box li {
       counter-increment: item;
-      margin-bottom: 20px;
-      padding-left: 35px;
+      margin-bottom: 25px;
+      padding-left: 38px;
       font-size: 17.5px;
       line-height: 1.5;
       position: relative;
@@ -90,23 +90,24 @@
       font-weight: bold;
       position: absolute;
       left: 0;
-      width: 28px;
+      width: 30px;
     }
 
-    /* Caixa para o nick do Discord - logo embaixo do texto 1. */
-    .discord-section {
-      margin-top: 15px;
-      padding: 20px;
+    /* Input do Discord direto embaixo do texto 1. */
+    .discord-input-container {
+      margin-top: 8px;
+      margin-bottom: 30px;
+      padding: 18px;
       background: #1a1a1a;
-      border: 2px solid #333;
+      border: 2px solid #444;
       border-radius: 12px;
     }
 
-    .discord-section label {
+    .discord-input-container label {
       display: block;
-      color: #ff4444;
+      color: #ff6666;
       margin-bottom: 8px;
-      font-weight: bold;
+      font-size: 15px;
     }
 
     .discord-input {
@@ -114,7 +115,7 @@
       padding: 15px;
       background: #111;
       color: white;
-      border: 2px solid #555;
+      border: 2px solid #666;
       border-radius: 10px;
       font-size: 17px;
       text-align: center;
@@ -126,8 +127,7 @@
     }
 
     .btn {
-      margin-top: 20px;
-      padding: 14px 45px;
+      padding: 15px 50px;
       background: #ff2222;
       color: white;
       border: none;
@@ -154,7 +154,16 @@
     <h2>Instruções</h2>
     
     <ol>
-      <li><strong>Bote o seu nick do Discord aqui para começar o formulário!</strong></li>
+      <li>
+        <strong>Bote o seu nick do Discord aqui para começar o formulário!</strong>
+        
+        <!-- Input direto embaixo do texto 1. -->
+        <div class="discord-input-container">
+          <label for="discord-nick">Seu Nick do Discord:</label>
+          <input type="text" id="discord-nick" class="discord-input" placeholder="Ex: Victor#1234 ou Victor" maxlength="50">
+        </div>
+      </li>
+      
       <li>Segundo item da lista</li>
       <li>Terceiro item da lista</li>
       <li>Quarto item da lista</li>
@@ -164,12 +173,6 @@
       <li>Oitavo item da lista</li>
       <li>Nono item da lista</li>
     </ol>
-
-    <!-- Caixa do nick do Discord logo embaixo do texto 1 -->
-    <div class="discord-section">
-      <label for="discord-nick">Seu Nick do Discord:</label>
-      <input type="text" id="discord-nick" class="discord-input" placeholder="Ex: Victor#1234 ou Victor" maxlength="50">
-    </div>
 
     <button class="btn" onclick="continuar()">Continuar</button>
   </div>
@@ -215,8 +218,7 @@
       if (nick === "") {
         alert("Por favor, digite seu nick do Discord para continuar!");
       } else {
-        alert("Nick salvo: " + nick + "\n\nO formulário continuaria na próxima etapa.");
-        // Aqui você pode colocar o que quiser que aconteça depois
+        alert("Nick do Discord salvo: " + nick + "\n\n(Formulário continuaria aqui)");
       }
     }
   </script>
