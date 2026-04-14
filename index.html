@@ -377,7 +377,10 @@
     });
 
     successScreen.style.display = 'flex';
-    setTimeout(() => successScreen.classList.add('show'), 10);
+
+requestAnimationFrame(() => {
+  successScreen.classList.add('show');
+});
 
   } catch (err) {
     console.log(err);
