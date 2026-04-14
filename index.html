@@ -359,7 +359,7 @@
     dados[id] = value;
   }
 
-  // ❌ se não preencher tudo
+  // ❌ se faltar algo
   if (!completo) {
     errorMessage.style.bottom = '30px';
     setTimeout(() => {
@@ -382,15 +382,6 @@
     alert("Erro ao enviar formulário!");
   }
 }
-
-      if (!completo) {
-        errorMessage.style.bottom = '30px';
-        setTimeout(() => { errorMessage.style.bottom = '-80px'; }, 3000);
-      } else {
-        successScreen.style.display = 'flex';
-        setTimeout(() => successScreen.classList.add('show'), 10);
-      }
-    }
 
     function voltarParaDiscord() {
       window.open("https://discord.com", "_blank");
