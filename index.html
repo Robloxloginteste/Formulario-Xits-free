@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Formulário com Bolinhas Vermelhas</title>
+  <title>Formulário Discord</title>
   <style>
     * {
       margin: 0;
@@ -19,8 +19,10 @@
       overflow: hidden;
       position: relative;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 40px 20px;
     }
 
     /* Fundo de bolinhas vermelhas */
@@ -47,105 +49,104 @@
       100% { transform: translateY(calc(100vh + 100px)); }
     }
 
-    /* Container principal */
-    .main-container {
+    /* Caixa de instruções - bem esticada */
+    .instructions-box {
       position: relative;
       z-index: 2;
-      display: flex;
-      gap: 60px;
-      max-width: 1100px;
-      padding: 40px;
-    }
-
-    /* Formulário com bordas pretas */
-    .form-container {
       background: rgba(20, 20, 20, 0.95);
-      padding: 40px;
+      padding: 35px 50px;
       border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(255, 50, 50, 0.2);
       border: 3px solid #000000;
-      width: 480px;
-    }
-
-    h1 {
-      margin-bottom: 30px;
-      color: #ff4444;
-      text-align: center;
-    }
-
-    input, textarea, button {
       width: 100%;
-      padding: 14px;
-      margin: 12px 0;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
+      max-width: 820px;
+      margin-bottom: 30px;
     }
 
-    input, textarea {
-      background: #1a1a1a;
-      color: white;
-      border: 2px solid #333;
-    }
-
-    button {
-      background: #ff2222;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-      margin-top: 10px;
-    }
-
-    button:hover {
-      background: #ff5555;
-      transform: scale(1.05);
-    }
-
-    label {
-      display: block;
-      text-align: left;
-      margin: 8px 0 4px;
-      font-size: 14px;
-    }
-
-    /* Lista ao lado */
-    .list-container {
-      background: rgba(20, 20, 20, 0.9);
-      padding: 40px;
-      border-radius: 16px;
-      border: 3px solid #000000;
-      width: 420px;
-      color: #ddd;
-    }
-
-    .list-container h2 {
+    .instructions-box h2 {
       color: #ff4444;
-      margin-bottom: 25px;
       text-align: center;
+      margin-bottom: 25px;
+      font-size: 24px;
     }
 
-    .list-container ol {
+    .instructions-box ol {
       list-style: none;
       counter-reset: item;
+      max-width: 700px;
+      margin: 0 auto;
     }
 
-    .list-container li {
+    .instructions-box li {
       counter-increment: item;
       margin-bottom: 22px;
-      padding-left: 10px;
-      font-size: 17.5px;
-      line-height: 1.4;
+      padding-left: 35px;
+      font-size: 18px;
+      line-height: 1.45;
       position: relative;
     }
 
-    .list-container li:before {
+    .instructions-box li:before {
       content: counter(item) ".";
       color: #ff4444;
       font-weight: bold;
       position: absolute;
-      left: -28px;
+      left: 0;
       width: 25px;
+    }
+
+    /* Caixa do Discord - embaixo */
+    .discord-box {
+      position: relative;
+      z-index: 2;
+      background: rgba(20, 20, 20, 0.95);
+      padding: 30px 40px;
+      border-radius: 16px;
+      border: 3px solid #000000;
+      width: 100%;
+      max-width: 820px;
+      text-align: center;
+    }
+
+    .discord-box h3 {
+      color: #ff4444;
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+
+    .discord-input {
+      width: 100%;
+      max-width: 500px;
+      padding: 16px;
+      margin: 0 auto;
+      background: #1a1a1a;
+      color: white;
+      border: 2px solid #333;
+      border-radius: 10px;
+      font-size: 17px;
+      text-align: center;
+    }
+
+    .discord-input:focus {
+      border-color: #ff4444;
+      outline: none;
+    }
+
+    .btn-discord {
+      margin-top: 20px;
+      padding: 14px 40px;
+      background: #ff2222;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-discord:hover {
+      background: #ff5555;
+      transform: scale(1.05);
     }
   </style>
 </head>
@@ -154,41 +155,28 @@
   <!-- Fundo animado -->
   <div class="background" id="background"></div>
 
-  <div class="main-container">
-    
-    <!-- Formulário -->
-    <div class="form-container">
-      <h1>Entre em Contato</h1>
-      <form>
-        <label for="nome">Nome</label>
-        <input type="text" id="nome" placeholder="Seu nome" required>
+  <!-- Caixa de instruções bem esticada -->
+  <div class="instructions-box">
+    <h2>Instruções</h2>
+    <ol>
+      <li><strong>Bote o seu nick do Discord aqui para começar o formulário!</strong></li>
+      <li>Segundo item da lista</li>
+      <li>Terceiro item da lista</li>
+      <li>Quarto item da lista</li>
+      <li>Quinto item da lista</li>
+      <li>Sexto item da lista</li>
+      <li>Sétimo item da lista</li>
+      <li>Oitavo item da lista</li>
+      <li>Nono item da lista</li>
+    </ol>
+  </div>
 
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="seu@email.com" required>
-
-        <label for="mensagem">Mensagem</label>
-        <textarea id="mensagem" rows="5" placeholder="Escreva sua mensagem..."></textarea>
-
-        <button type="submit">Enviar Mensagem</button>
-      </form>
-    </div>
-
-    <!-- Lista com o texto solicitado -->
-    <div class="list-container">
-      <h2>Instruções</h2>
-      <ol>
-        <li><strong>Bote o seu nick do Discord aqui para começar o formulário!</strong></li>
-        <li>Segundo item da lista</li>
-        <li>Terceiro item da lista</li>
-        <li>Quarto item da lista</li>
-        <li>Quinto item da lista</li>
-        <li>Sexto item da lista</li>
-        <li>Sétimo item da lista</li>
-        <li>Oitavo item da lista</li>
-        <li>Nono item da lista</li>
-      </ol>
-    </div>
-
+  <!-- Caixa para colocar o nick do Discord -->
+  <div class="discord-box">
+    <h3>Digite seu Nick do Discord</h3>
+    <input type="text" class="discord-input" id="discord-nick" placeholder="Ex: SeuNick#1234 ou SeuNick" maxlength="50">
+    <br>
+    <button class="btn-discord" onclick="enviarDiscord()">Continuar</button>
   </div>
 
   <script>
@@ -223,8 +211,20 @@
 
     startAnimation();
 
+    // Bolinhas iniciais
     for (let i = 0; i < 90; i++) {
       createParticle();
+    }
+
+    // Função do botão (pode ser alterada depois)
+    function enviarDiscord() {
+      const nick = document.getElementById('discord-nick').value.trim();
+      if (nick === "") {
+        alert("Por favor, digite seu nick do Discord!");
+      } else {
+        alert("Nick do Discord recebido: " + nick + "\n\n(Formulário continuaria aqui na próxima etapa)");
+        // Aqui você pode redirecionar ou mostrar o próximo formulário
+      }
     }
   </script>
 
