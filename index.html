@@ -48,39 +48,39 @@
       100% { transform: translateY(calc(100vh + 100px)); }
     }
 
-    /* Caixa principal - tamanho justo */
+    /* Caixa principal - tamanho justo e compacto */
     .main-box {
       position: relative;
       z-index: 2;
       background: rgba(20, 20, 20, 0.95);
-      padding: 40px 45px;
+      padding: 35px 40px;
       border-radius: 16px;
       border: 3px solid #000000;
       width: 100%;
-      max-width: 680px;        /* Tamanho justo */
+      max-width: 620px;        /* Caixa menor */
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     }
 
     .main-box h2 {
       color: #ff4444;
       text-align: center;
-      margin-bottom: 35px;
-      font-size: 24px;
+      margin-bottom: 30px;
+      font-size: 23px;
     }
 
     .main-box ol {
       list-style: none;
       counter-reset: item;
-      max-width: 580px;
+      max-width: 550px;
       margin: 0 auto;
     }
 
     .main-box li {
       counter-increment: item;
-      margin-bottom: 35px;
-      padding-left: 40px;
-      font-size: 17px;
-      line-height: 1.5;
+      margin-bottom: 28px;
+      padding-left: 38px;
+      font-size: 16.5px;
+      line-height: 1.45;
       position: relative;
     }
 
@@ -93,21 +93,20 @@
       width: 30px;
     }
 
-    /* Caixa de resposta para cada pergunta */
+    /* Caixas de resposta menores */
     .answer-box {
-      margin-top: 12px;
-      width: 100%;
+      margin-top: 10px;
     }
 
     .answer-box textarea {
       width: 100%;
-      min-height: 110px;
-      padding: 14px;
+      min-height: 85px;        /* Caixas bem menores */
+      padding: 12px;
       background: #111;
       color: white;
       border: 2px solid #555;
       border-radius: 10px;
-      font-size: 16px;
+      font-size: 15.5px;
       resize: vertical;
     }
 
@@ -118,13 +117,13 @@
 
     .btn {
       display: block;
-      margin: 30px auto 0;
-      padding: 15px 60px;
+      margin: 25px auto 0;
+      padding: 13px 55px;
       background: #ff2222;
       color: white;
       border: none;
       border-radius: 10px;
-      font-size: 17px;
+      font-size: 16.5px;
       font-weight: bold;
       cursor: pointer;
       transition: 0.3s;
@@ -150,7 +149,7 @@
       <li>
         <strong>Bote o seu nick do Discord aqui para começar o formulário!</strong>
         <div class="answer-box">
-          <textarea id="discord-nick" placeholder="Ex: Victor#1234 ou Victor" maxlength="50"></textarea>
+          <textarea id="discord-nick" placeholder="Ex: Victor#1234 ou Victor" maxlength="50" rows="2"></textarea>
         </div>
       </li>
 
@@ -226,8 +225,7 @@
         return;
       }
 
-      alert("✅ Formulário enviado com sucesso!\n\nNick: " + nick + "\n\nAs respostas foram registradas.");
-      // Aqui você pode adicionar código para enviar os dados de verdade depois
+      alert("✅ Formulário enviado com sucesso!\n\nNick: " + nick);
     }
   </script>
 
