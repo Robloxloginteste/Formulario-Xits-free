@@ -340,8 +340,6 @@
     const successScreen = document.getElementById('success-screen');
 
     async function enviarFormulario() {
-  console.log("BOTÃO FOI CLICADO");
-
   const campos = [
     'discord-nick','pergunta2','pergunta3','pergunta4','pergunta5',
     'pergunta6','pergunta7','pergunta8','pergunta9','pergunta10'
@@ -369,22 +367,20 @@
     return;
   }
 
-  await fetch("/.netlify/functions/send-form", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify(dados)
-});
-
-    const data = await response.json();
-    console.log("FUNCIONOU:", data);
+  try {
+    await fetch("/.netlify/functions/send-form", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(dados)
+    });
 
     successScreen.style.display = 'flex';
     setTimeout(() => successScreen.classList.add('show'), 10);
 
   } catch (err) {
-    console.log("ERRO:", err);
+    console.log(err);
     alert("Erro ao enviar formulário!");
   }
 }
